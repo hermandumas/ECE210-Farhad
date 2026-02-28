@@ -1,56 +1,53 @@
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  title:        "EIF Neuron (Exponential Integrate-and-Fire)"      # Project title
+  author:       "Farhad"      # Your name
+  discord:      ""      # Your discord username (optional)
+  description:  "Single exponential integrate-and-fire neuron with LUT-based exponential term; signed current in, membrane+spike out."      # One line description
+  language:     "Verilog"
+  clock_hz:     10000000       # Assumed 10 MHz TinyTapeout clock; update if different
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  tiles: "1x1"
 
-  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  # Your top module name must start with "tt_um_".
   top_module:  "tt_um_example"
 
-  # List your project's source files here.
-  # Source files must be in ./src and you must list each source file separately, one per line.
-  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  # List your project's source files here (relative to ./src).
   source_files:
     - "project.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
-# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
-  # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  # Inputs (signed 2's complement current injection)
+  ui[0]: "I_in[0]"
+  ui[1]: "I_in[1]"
+  ui[2]: "I_in[2]"
+  ui[3]: "I_in[3]"
+  ui[4]: "I_in[4]"
+  ui[5]: "I_in[5]"
+  ui[6]: "I_in[6]"
+  ui[7]: "I_in[7] (sign)"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "V_disp[0]"
+  uo[1]: "V_disp[1]"
+  uo[2]: "V_disp[2]"
+  uo[3]: "V_disp[3]"
+  uo[4]: "V_disp[4]"
+  uo[5]: "V_disp[5]"
+  uo[6]: "V_disp[6] (MSB)"
+  uo[7]: "spike_pulse"
 
-  # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
+  # Bidirectional pins (used as inputs; uio_oe=0)
+  uio[0]: "run_en"
+  uio[1]: "step_mode"
+  uio[2]: "step_pulse"
   uio[3]: ""
   uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  uio[5]: "tick_scale[0]"
+  uio[6]: "tick_scale[1]"
+  uio[7]: "tick_scale[2]"
 
 # Do not change!
 yaml_version: 6
